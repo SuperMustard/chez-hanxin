@@ -15,6 +15,33 @@
   box-sizing: border-box;
 }
 
+@layer base {
+  h1 {
+    @apply text-4xl;
+    @apply font-bold;
+  }
+  h2 {
+    @apply text-3xl;
+    @apply font-bold;
+  }
+  h3 {
+    @apply text-2xl;
+    @apply font-bold;
+  }
+  h4 {
+    @apply text-xl;
+    @apply font-semibold;
+  }
+  h5 {
+    @apply text-lg; /*or text-lg */
+    @apply font-semibold;
+  }
+  h6 {
+    @apply text-sm;
+    @apply font-semibold;
+  }
+}
+
 body {
   max-width: 100vw;
   overflow-x: hidden;
@@ -25,6 +52,13 @@ a {
   text-decoration: none;
 }
 
+.dark {
+  --bg: #0f172a;
+  --textColor: #ddd;
+  --secondBg: #1f273a;
+  --secondTextColor: #a6a6a6;
+}
+
 .container {
   max-width: 100vw;
   min-height: 100vh;
@@ -33,10 +67,37 @@ a {
 }
 
 .wrapper {
-  max-width: 1500px;
+  max-width: 1536px;
   margin-left: auto;
   margin-right: auto;
-  background-color: blanchedalmond;
+  padding-left: 80px;
+  padding-right: 80px;
+}
+
+@media screen and (max-width: 1280px) {
+  .wrapper {
+    max-width: 1024px;
+  }
+}
+
+@media screen and (max-width: 1024px) {
+  .wrapper {
+    max-width: 768px;
+    padding-left: 30px;
+    padding-right: 30px;
+  }
+}
+
+@media screen and (max-width: 768px) {
+  .wrapper {
+    max-width: 640px;
+  }
+}
+
+@media screen and (max-width: 640px) {
+  .wrapper {
+    max-width: 425px;
+  }
 }
 
 @layer utilities {
