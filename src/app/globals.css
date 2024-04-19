@@ -8,6 +8,10 @@
   box-sizing: border-box;
 }
 
+:root {
+  --specialColor: #ee0707;
+}
+
 .light {
   --bg: white;
   --revertBG: #393838;
@@ -42,7 +46,7 @@
     @apply font-semibold;
   }
   h5 {
-    @apply text-lg; /*or text-lg */
+    @apply text-lg;
     @apply font-semibold;
   }
   h6 {

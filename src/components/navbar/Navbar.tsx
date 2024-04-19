@@ -14,11 +14,11 @@ function Navbar() {
       <div className={styles.title}>
         Chez Hanxin
       </div>
-      <div className={styles.link}>
+      <div className={styles.links}>
         <ThemeToggle></ThemeToggle>
-        <Link href="/">Homepage</Link>
-        <Link href="/">Contact</Link>
-        <Link href="/">About</Link>
+        <Link href="/" className={styles.link}>Homepage</Link>
+        <Link href="/" className={styles.link}>Contact</Link>
+        <Link href="/" className={styles.link}>About</Link>
         <LoginLink></LoginLink>
       </div>
     </div>
