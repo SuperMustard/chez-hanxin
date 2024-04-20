@@ -9,7 +9,7 @@ function Menu() {
     <div className={styles.container}>
       <h3>Most Popular</h3>
       <MenuPost withImage={true}></MenuPost>
-
+    
       <h3>Tags</h3>
       <div className={styles.tags}>
         <Link href="/" className={styles.tag}>
