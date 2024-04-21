@@ -1,7 +1,7 @@
 import React from 'react'
 import styles from './cardList.module.css'
 import Pagination from '../pagination/Pagination'
-import Card from '../Card/Card'
+import Card from '../card/Card'
 
 function CardList() {
   return (

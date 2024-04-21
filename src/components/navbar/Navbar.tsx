@@ -3,7 +3,7 @@ import styles from './navbar.module.css'
 import Image from 'next/image'
 import Link from 'next/link'
 import ThemeToggle from '../ThemeToggle/ThemeToggle'
-import LoginLink from '../LoginLink/LoginLink'
+import LoginLink from '../loginLink/LoginLink'
 
 function Navbar() {
   return (
