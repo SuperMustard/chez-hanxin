@@ -2,7 +2,7 @@ import React from 'react'
 import styles from './navbar.module.css'
 import Image from 'next/image'
 import Link from 'next/link'
-import ThemeToggle from '../ThemeToggle/ThemeToggle'
+import ThemeToggle from '../themeToggle/ThemeToggle'
 import LoginLink from '../loginLink/LoginLink'
 
 function Navbar() {

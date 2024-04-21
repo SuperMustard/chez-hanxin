@@ -7,8 +7,8 @@ function Featured() {
     <div className={styles.container}>
       <h1 className={styles.title}>
         <div className="relative">
-        <Image src='/00_bg.png'  alt="" width={0}
-          height={0} layout='fill' className='absolute'/>
+        {/* <Image src='/00_bg.png'  alt="" width={0}
+          height={0} layout='fill' className='absolute'/> */}
         <b >Hey, my name is Hanxin!</b> Discover my life here.
         </div>
       </h1>
