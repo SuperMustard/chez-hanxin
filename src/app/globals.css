@@ -111,3 +111,11 @@ a {
     text-wrap: balance;
   }
 }
+
+.ql-container {
+  font-size: 28px !important;
+}
+
+.quill > .ql-container > .ql-editor.ql-blank::before {
+  color: #a6a6a6;
+}

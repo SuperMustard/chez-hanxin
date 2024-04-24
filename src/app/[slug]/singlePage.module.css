@@ -73,6 +73,7 @@
 .postContainer {
   display: flex;
   flex-direction: column;
+  flex: 5;
 }
 
 .post {
