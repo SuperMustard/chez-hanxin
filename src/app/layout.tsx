@@ -5,30 +5,33 @@ import Footer from "@/components/footer/Footer";
 import { ThemeContextProvider } from "../context/ThemeContext";
 import ThemeProvider from "@/providers/ThemeProvider";
 import { ScriptProps } from "next/script";
+import AuthProvider from "@/providers/AuthProvider";
 
 const inter = Inter({ subsets: ["latin"] });
 
 export const metadata = {
-  title: 'Chez Hanxin',
-  description: 'this is my blog A',
+  title: "Chez Hanxin",
+  description: "this is my blog A",
 };
 
-export default function RootLayout({ children } : ScriptProps): JSX.Element{
+export default function RootLayout({ children }: ScriptProps): JSX.Element {
   return (
     <html lang="en">
       <body className={inter.className}>
-        <ThemeContextProvider>
-          <ThemeProvider>
-        <div className="container">
-          <div className="wrapper">
-            <Navbar></Navbar>
-            {children}
-            <Footer></Footer>
-          </div>
-        </div>
-        </ThemeProvider>
-        </ThemeContextProvider>
+        <AuthProvider>
+          <ThemeContextProvider>
+            <ThemeProvider>
+              <div className="container">
+                <div className="wrapper">
+                  <Navbar></Navbar>
+                  {children}
+                  <Footer></Footer>
+                </div>
+              </div>
+            </ThemeProvider>
+          </ThemeContextProvider>
+        </AuthProvider>
       </body>
     </html>
-  )
-};
+  );
+}
