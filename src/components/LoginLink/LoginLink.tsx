@@ -3,15 +3,16 @@
 import Link from "next/link";
 import React, { useState } from "react";
 import styles from "./loginLink.module.css";
-import { signOut } from "next-auth/react";
+import { signOut, useSession } from "next-auth/react";
+import { stat } from "fs";
 
 function LoginLink() {
   const [open, setOpen] = useState(false);
-  const loginStatus = "notauthenticated";
-
+  const { status } = useSession();
+  console.log(status);
   return (
     <>
-      {loginStatus === "notauthenticated" ? (
+      {status === "unauthenticated" ? (
         <Link className={styles.link} href="/login">
           Login
         </Link>
@@ -38,7 +39,7 @@ function LoginLink() {
           <Link href="/">Homepage</Link>
           <Link href="/">About</Link>
           <Link href="/">Contact</Link>
-          {loginStatus === "notauthenticated" ? (
+          {status === "unauthenticated" ? (
             <Link href="/">Login</Link>
           ) : (
             <>
