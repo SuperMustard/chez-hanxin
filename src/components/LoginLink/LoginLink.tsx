@@ -9,7 +9,6 @@ import { stat } from "fs";
 function LoginLink() {
   const [open, setOpen] = useState(false);
   const { status } = useSession();
-  console.log(status);
   return (
     <>
       {status === "unauthenticated" ? (

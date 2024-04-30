@@ -5,7 +5,8 @@ import Image from "next/image";
 import { Category } from "@prisma/client";
 
 async function getData(): Promise<any> {
-  const res = await fetch("http://localhost:3000/api/categories", {
+  const url: string = `${process.env.APIBASE_URL}/api/categories`;
+  const res = await fetch(url, {
     cache: "no-store",
   });
 
@@ -29,13 +30,15 @@ async function CategoryList() {
             className={`${styles.category} ${styles[item.slug]}`}
             key={item.id}
           >
-            <Image
-              src={item?.img || ""}
-              alt=""
-              width={32}
-              height={32}
-              className={styles.image}
-            />
+            {item.img && (
+              <Image
+                src={item?.img || ""}
+                alt=""
+                width={32}
+                height={32}
+                className={styles.image}
+              />
+            )}
             {item.title}
           </Link>
         ))}
