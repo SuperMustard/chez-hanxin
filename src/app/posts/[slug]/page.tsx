@@ -38,14 +38,17 @@ export default async function Page({ params }: { params: searchParams }) {
                 <Image
                   src={data?.user?.image}
                   alt=""
-                  fill
+                  width={50}
+                  height={50}
                   className={styles.avatar}
                 />
               </div>
             )}
             <div className={styles.userTextContainer}>
               <span className={styles.username}>{data?.user.name}</span>
-              <span className={styles.date}>21.04.2024</span>
+              <span className={styles.date}>
+                {data?.createdAt.substring(0, 10)}
+              </span>
             </div>
           </div>
         </div>
@@ -54,7 +57,13 @@ export default async function Page({ params }: { params: searchParams }) {
         <div className={styles.postContainer}>
           {data?.img && (
             <div className={styles.imageContainer}>
-              <Image src={data?.img} alt="" fill className={styles.image} />
+              <Image
+                src={data?.img}
+                alt=""
+                fill
+                className={styles.image}
+                sizes="100vw"
+              />
             </div>
           )}
           <div
@@ -62,7 +71,7 @@ export default async function Page({ params }: { params: searchParams }) {
             dangerouslySetInnerHTML={{ __html: desc }}
           ></div>
           <div className={styles.commentContainer}>
-            <Comments></Comments>
+            <Comments postSlug={slug}></Comments>
           </div>
         </div>
         <Menu />

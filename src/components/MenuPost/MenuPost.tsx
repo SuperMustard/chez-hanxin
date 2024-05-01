@@ -1,21 +1,27 @@
-import { ScriptProps } from 'next/script'
-import styles from './menuPost.module.css';
-import React from 'react'
-import Link from 'next/link';
-import Image from 'next/image';
+import { ScriptProps } from "next/script";
+import styles from "./menuPost.module.css";
+import React from "react";
+import Link from "next/link";
+import Image from "next/image";
 
 interface MenuPostProp {
-    withImage: boolean;
+  withImage: boolean;
 }
 
-function MenuPost({withImage} : MenuPostProp) {
+function MenuPost({ withImage }: MenuPostProp) {
   return (
     <>
       <div className={styles.items}>
         <Link href="/" className={styles.item}>
-        {withImage && (
+          {withImage && (
             <div className={styles.imageContainer}>
-                <Image src="/p1.jpeg" alt="" fill className={styles.image}></Image>
+              <Image
+                src="/p1.jpeg"
+                alt=""
+                fill
+                className={styles.image}
+                sizes="20vw"
+              ></Image>
             </div>
           )}
           <div className={styles.textContainer}>
@@ -31,9 +37,15 @@ function MenuPost({withImage} : MenuPostProp) {
         </Link>
 
         <Link href="/" className={styles.item}>
-        {withImage && (
+          {withImage && (
             <div className={styles.imageContainer}>
-                <Image src="/p1.jpeg" alt="" fill className={styles.image}></Image>
+              <Image
+                src="/p1.jpeg"
+                alt=""
+                fill
+                className={styles.image}
+                sizes="20vw"
+              ></Image>
             </div>
           )}
           <div className={styles.textContainer}>
@@ -49,15 +61,19 @@ function MenuPost({withImage} : MenuPostProp) {
         </Link>
 
         <Link href="/" className={styles.item}>
-        {withImage && (
+          {withImage && (
             <div className={styles.imageContainer}>
-                <Image src="/p1.jpeg" alt="" fill className={styles.image}></Image>
+              <Image
+                src="/p1.jpeg"
+                alt=""
+                fill
+                className={styles.image}
+                sizes="20vw"
+              ></Image>
             </div>
           )}
           <div className={styles.textContainer}>
-            <span className={`${styles.category} ${styles.life}`}>
-              Life
-            </span>
+            <span className={`${styles.category} ${styles.life}`}>Life</span>
             <h4 className={styles.postTitle}>Lorem ipsum dolor sit amet</h4>
             <div className={styles.detail}>
               <span className={styles.username}>Hanxin</span>
@@ -69,13 +85,17 @@ function MenuPost({withImage} : MenuPostProp) {
         <Link href="/" className={styles.item}>
           {withImage && (
             <div className={styles.imageContainer}>
-                <Image src="/p1.jpeg" alt="" fill className={styles.image}></Image>
+              <Image
+                src="/p1.jpeg"
+                alt=""
+                fill
+                className={styles.image}
+                sizes="20vw"
+              ></Image>
             </div>
           )}
           <div className={styles.textContainer}>
-            <span className={`${styles.category} ${styles.game}`}>
-              Game
-            </span>
+            <span className={`${styles.category} ${styles.game}`}>Game</span>
             <h4 className={styles.postTitle}>Lorem ipsum dolor sit amet</h4>
             <div className={styles.detail}>
               <span className={styles.username}>Hanxin</span>
@@ -85,7 +105,7 @@ function MenuPost({withImage} : MenuPostProp) {
         </Link>
       </div>
     </>
-  )
+  );
 }
 
-export default MenuPost
+export default MenuPost;

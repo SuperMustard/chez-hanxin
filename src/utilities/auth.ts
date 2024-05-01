@@ -1,4 +1,4 @@
-import NextAuth from "next-auth";
+import NextAuth, { getServerSession } from "next-auth";
 import Github from "next-auth/providers/github";
 import LinkedIn from "next-auth/providers/linkedin";
 import Google from "next-auth/providers/google";
@@ -19,3 +19,5 @@ export const authOptions = {
     }),
   ],
 };
+
+export const getAuthSession = () => getServerSession(authOptions);

@@ -9,12 +9,22 @@ type prop = {
   post: Post;
 };
 
+function removeHTMLTags(str: string): string {
+  return str.replace(/<[^>]+>/gi, "");
+}
+
 function Card({ post }: prop) {
   return (
     <div className={styles.container}>
       {post.img && (
         <div className={styles.imageContainer}>
-          <Image src={post.img} alt="" fill className={styles.image} />
+          <Image
+            src={post.img}
+            alt=""
+            fill
+            className={styles.image}
+            sizes="100vw"
+          />
         </div>
       )}
       <div className={styles.textContainer}>
@@ -27,7 +37,9 @@ function Card({ post }: prop) {
         <Link href={`/posts/${post.slug}`}>
           <h3>{post.title}</h3>
         </Link>
-        <p className={styles.desc}>{post.desc.substring(0, 60)}</p>
+        <p className={styles.desc}>
+          {removeHTMLTags(post.desc.substring(0, 60))}
+        </p>
         <Link className={styles.link} href={`/posts/${post.slug}`}>
           Read More...
         </Link>
