@@ -4,6 +4,8 @@ This is my personal blog project.
 
 ### Tech Stack
 + Next.js
++ authjs
++ Prisma
 + MongoDB
 
 ---
