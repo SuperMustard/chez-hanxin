@@ -26,3 +26,6 @@ jobs:
       - run: npm ci
       - run: npx prisma generate
       - run: npm run build
+      - name: change directory
+      - run: cd /home/hanxin/actions-runner/_work/chez-hanxin/chez-hanxin
+      - run: pm2 restart 0
