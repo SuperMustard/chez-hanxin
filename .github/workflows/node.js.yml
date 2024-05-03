@@ -18,6 +18,21 @@ jobs:
 
     steps:
       - uses: actions/checkout@v4
+      - name: Create .env
+        run: |
+          touch .env
+          echo NEXTAUTH_URL=${{secrets.NEXTAUTH_URL}} >> .env
+          echo NEXTAUTH_SECRET=${{secrets.NEXTAUTH_SECRET}} >> .env
+          echo APIBASE_URL=${{secrets.APIBASE_URL}} >> .env
+          echo FIREBASE_API=${{secrets.FIREBASE_API}} >> .env
+          echo FIREBASE_APPID=${{secrets.FIREBASE_APPID}} >> .env
+          echo FIREBASE_SENDERID=${{secrets.FIREBASE_SENDERID}} >> .env
+          echo FIREBASE_AUTHDOMAIN=${{secrets.FIREBASE_AUTHDOMAIN}} >> .env
+          echo FIREBASE_PROJID=${{secrets.FIREBASE_PROJID}} >> .env
+          echo FIREBASE_BUCKET=${{secrets.FIREBASE_BUCKET}} >> .env
+          echo POST_PER_PAGE=${{secrets.POST_PER_PAGE}} >> .env
+          echo DATABASE_URL=${{secrets.DATABASE_URL}} >> .env
+          cat .env
       - name: Use Node.js ${{ matrix.node-version }}
         uses: actions/setup-node@v3
         with:
