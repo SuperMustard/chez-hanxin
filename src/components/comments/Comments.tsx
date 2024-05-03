@@ -6,7 +6,7 @@ import Link from "next/link";
 import Image from "next/image";
 import useSWR from "swr";
 import { useSession } from "next-auth/react";
-import { Comment } from "@prisma/client";
+import { Comment, User } from "@prisma/client";
 
 type Props = {
   postSlug: string;
@@ -23,6 +23,15 @@ async function fetcher(url: string) {
 
   return data;
 }
+
+type CommentWithUser = {
+  id: string;
+  createdAt: string;
+  desc: string;
+  userEmail: string;
+  postSlug: string;
+  user: User;
+};
 
 export default function Comments({ postSlug }: Props) {
   const { status } = useSession();
@@ -62,7 +71,7 @@ export default function Comments({ postSlug }: Props) {
       <div className={styles.comments}>
         {isLoading
           ? "loading"
-          : data?.map((item: Comment) => (
+          : data?.map((item: CommentWithUser) => (
               <div className={styles.comment} key={item.id}>
                 <div className={styles.userContainer}>
                   {item?.user?.image && (

@@ -3,7 +3,7 @@ import styles from "./singlePage.module.css";
 import Image from "next/image";
 import Menu from "@/components/menu/Menu";
 import Comments from "@/components/comments/Comments";
-import { Post } from "@prisma/client";
+import { Post, User } from "@prisma/client";
 
 async function getData(slug: string): Promise<any> {
   const url: string = `${process.env.APIBASE_URL}/api/posts/${slug}`;
@@ -22,10 +22,23 @@ type searchParams = {
   slug: string;
 };
 
+type PostWithUser = {
+  id: string;
+  createdAt: string;
+  slug: string;
+  title: string;
+  desc: string;
+  img: string | null;
+  views: number;
+  catSlug: string;
+  userEmail: string;
+  user: User;
+};
+
 export default async function Page({ params }: { params: searchParams }) {
   const { slug } = params;
 
-  const data: Post = await getData(slug);
+  const data: PostWithUser = await getData(slug);
   const desc = data?.desc || "";
   return (
     <div className={styles.container}>

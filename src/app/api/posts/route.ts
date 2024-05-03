@@ -3,7 +3,7 @@ import prisma from "@/utilities/connect";
 import { NextResponse } from "next/server";
 
 //Get All Posts
-export async function GET(req: { url: string | URL }) {
+export async function GET(req: Request) {
   const { searchParams } = new URL(req.url);
   const page = parseInt(searchParams.get("page") || "1");
   const cat = searchParams.get("cat") || "";
