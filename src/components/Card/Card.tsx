@@ -4,9 +4,21 @@ import Image from "next/image";
 import Link from "next/link";
 import { Post } from "@prisma/client";
 
+type PostDataString = {
+  id: string;
+  createdAt: string;
+  slug: string;
+  title: string;
+  desc: string;
+  img: string | null;
+  views: number;
+  catSlug: string;
+  userEmail: string;
+};
+
 type prop = {
   key: string;
-  post: Post;
+  post: PostDataString;
 };
 
 function removeHTMLTags(str: string): string {

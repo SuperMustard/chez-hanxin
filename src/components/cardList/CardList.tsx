@@ -16,6 +16,17 @@ async function getData(page: number, cat: string): Promise<any> {
 
   return res.json();
 }
+type PostDataString = {
+  id: string;
+  createdAt: string;
+  slug: string;
+  title: string;
+  desc: string;
+  img: string | null;
+  views: number;
+  catSlug: string;
+  userEmail: string;
+};
 
 type prop = {
   page: number;
@@ -34,7 +45,7 @@ async function CardList({ page, cat }: prop) {
     <div className={styles.container}>
       <h1 className={styles.title}>Recent Posts</h1>
       <div className={styles.post}>
-        {posts?.map((item: Post) => (
+        {posts?.map((item: PostDataString) => (
           <Card post={item} key={item.id}></Card>
         ))}
       </div>
