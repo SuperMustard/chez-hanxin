@@ -11,7 +11,7 @@ const inter = Inter({ subsets: ["latin"] });
 
 export const metadata = {
   title: "Chez Hanxin",
-  description: "this is my blog A",
+  description: "this is my blog",
 };
 
 export default function RootLayout({ children }: ScriptProps): JSX.Element {

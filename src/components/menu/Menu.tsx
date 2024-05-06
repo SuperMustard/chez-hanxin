@@ -1,8 +1,8 @@
-import React from 'react'
-import styles from './menu.module.css'
-import Link from 'next/link'
-import Image from 'next/image'
-import MenuPost from '../menuPost/MenuPost'
+import React from "react";
+import styles from "./menu.module.css";
+import Link from "next/link";
+import Image from "next/image";
+import MenuPost from "../menuPost/MenuPost";
 
 function Menu() {
   return (
@@ -10,7 +10,7 @@ function Menu() {
       <h3>Most Popular</h3>
       <MenuPost withImage={true}></MenuPost>
 
-      <div  className={styles.tagContainer}>
+      {/* <div  className={styles.tagContainer}>
         <h3>Tags</h3>
         <div className={styles.tags}>
           <Link href="/" className={styles.tag}>
@@ -41,9 +41,9 @@ function Menu() {
             React
           </Link>
         </div>
-      </div>
+      </div> */}
     </div>
-  )
+  );
 }
 
-export default Menu
+export default Menu;

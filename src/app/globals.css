@@ -18,6 +18,7 @@
   --textColor: black;
   --secondBg: #f0f0f0;
   --secondTextColor: #626262;
+  --githubLogo: url("/github-mark.svg");
 }
 
 .dark {
@@ -26,6 +27,7 @@
   --textColor: #ddd;
   --secondBg: #1f273a;
   --secondTextColor: #a6a6a6;
+  --githubLogo: url("/github-mark-white.svg");
 }
 
 @layer base {

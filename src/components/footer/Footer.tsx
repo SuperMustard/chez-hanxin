@@ -1,46 +1,63 @@
-import React from 'react'
-import styles from './footer.module.css'
-import Image from 'next/image'
-import Link from 'next/link'
+import React from "react";
+import styles from "./footer.module.css";
+import Image from "next/image";
+import Link from "next/link";
+import SocialLogo from "../socialLogo/SocialLogo";
 
 function Footer() {
   return (
     <div className={styles.container}>
       <div className={styles.info}>
         <div className={styles.logo}>
-          <Image src="/logo.png" alt="chez-hanxin" width={50} height={50}/>
+          <Image
+            src="/corgi_logo.png"
+            alt="chez-hanxin"
+            width={50}
+            height={50}
+          />
           <h1 className={styles.logoDesc}>Chez Hanxin</h1>
         </div>
         <p className={styles.desc}>
-          This is my personal blog, you can learn about my life here. I also hope my tech blogs can help you!
+          This is my personal blog, you can learn about my life here. I also
+          hope my tech blogs can help you!
         </p>
-        <div className={styles.icons}>
-          <Image src='/youtube.png' alt="" width={18} height={18} />
-        </div>
+        <SocialLogo></SocialLogo>
       </div>
       <div className={styles.links}>
         <div className={styles.list}>
           <span className={styles.listTitle}>Links</span>
-          <Link href='/'>Homepage</Link>
-          <Link href='/'>Blog</Link>
-          <Link href='/'>About</Link>
-          <Link href='/'>Contact</Link>
+          <Link href="/">Homepage</Link>
+          <Link href="/">About</Link>
+          <Link href="/">Contact</Link>
+          <Link href="/">PlayGround</Link>
         </div>
         <div className={styles.list}>
           <span className={styles.listTitle}>Categories</span>
-          <Link href='/'>Coding</Link>
-          <Link href='/'>Game</Link>
-          <Link href='/'>Travel</Link>
-          <Link href='/'>Life</Link>
+          <Link href="/blog?cat=coding">Coding</Link>
+          <Link href="/blog?cat=game">Game</Link>
+          <Link href="/blog?cat=travel">Travel</Link>
+          <Link href="/blog?cat=life">Life</Link>
         </div>
         <div className={styles.list}>
           <span className={styles.listTitle}>Social</span>
-          <Link href='/'>Twitter</Link>
-          <Link href='/'>LinkedIn</Link>
+          <Link
+            href="https://www.github.com/SuperMustard"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            Github
+          </Link>
+          <Link
+            href="https://www.linkedin.com/in/hanxin-jia-2091a48b"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            LinkedIn
+          </Link>
         </div>
       </div>
     </div>
-  )
+  );
 }
 
-export default Footer
+export default Footer;

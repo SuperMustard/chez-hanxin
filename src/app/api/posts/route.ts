@@ -1,5 +1,6 @@
 import { getAuthSession } from "@/utilities/auth";
 import prisma from "@/utilities/connect";
+import { Prisma } from "@prisma/client";
 import { NextResponse } from "next/server";
 
 //Get All Posts
@@ -7,13 +8,18 @@ export async function GET(req: Request) {
   const { searchParams } = new URL(req.url);
   const page = parseInt(searchParams.get("page") || "1");
   const cat = searchParams.get("cat") || "";
-
+  const orderBy: Prisma.PostOrderByWithRelationInput[] = [
+    {
+      createdAt: "desc",
+    },
+  ];
   const query = {
     take: parseInt(process.env.POST_PER_PAGE || "4"),
     skip: parseInt(process.env.POST_PER_PAGE || "4") * (page - 1),
     where: {
       ...(cat && { catSlug: cat }),
     },
+    orderBy,
   };
 
   try {

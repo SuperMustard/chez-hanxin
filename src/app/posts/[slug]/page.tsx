@@ -22,19 +22,6 @@ type searchParams = {
   slug: string;
 };
 
-type PostWithUser = {
-  id: string;
-  createdAt: string;
-  slug: string;
-  title: string;
-  desc: string;
-  img: string | null;
-  views: number;
-  catSlug: string;
-  userEmail: string;
-  user: User;
-};
-
 export default async function Page({ params }: { params: searchParams }) {
   const { slug } = params;
 

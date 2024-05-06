@@ -16,17 +16,6 @@ async function getData(page: number, cat: string): Promise<any> {
 
   return res.json();
 }
-type PostDataString = {
-  id: string;
-  createdAt: string;
-  slug: string;
-  title: string;
-  desc: string;
-  img: string | null;
-  views: number;
-  catSlug: string;
-  userEmail: string;
-};
 
 type prop = {
   page: number;
