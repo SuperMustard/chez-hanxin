@@ -31,7 +31,7 @@ export default function SocialLogo({}: Props) {
         ></Image>
       </a>
       <a
-        href="www.linkedin.com/in/hanxin-jia-2091a48b"
+        href="https://www.linkedin.com/in/hanxin-jia-2091a48b"
         target="_blank"
         rel="noopener noreferrer"
       >
