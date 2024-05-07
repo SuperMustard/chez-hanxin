@@ -8,7 +8,7 @@ function Menu() {
   return (
     <div className={styles.container}>
       <h3>Most Popular</h3>
-      <MenuPost withImage={true}></MenuPost>
+      <MenuPost></MenuPost>
 
       {/* <div  className={styles.tagContainer}>
         <h3>Tags</h3>

@@ -11,11 +11,12 @@ export async function GET() {
   ];
   const query = {
     take: parseInt(process.env.POST_PER_PAGE || "5"),
+    include: { user: true },
     orderBy,
   };
 
   try {
-    const posts = await prisma.$transaction([prisma.post.findMany(query)]);
+    const posts = await prisma.post.findMany(query);
     return new NextResponse(JSON.stringify(posts));
   } catch (err) {
     console.log(err);
