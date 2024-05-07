@@ -3,6 +3,7 @@ import styles from "./menuPost.module.css";
 import React from "react";
 import Link from "next/link";
 import Image from "next/image";
+import { User } from "@prisma/client";
 
 async function getData(): Promise<any> {
   const url: string = `${process.env.APIBASE_URL}/api/mostviewed`;

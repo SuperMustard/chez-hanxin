@@ -8,7 +8,8 @@ import { stat } from "fs";
 
 function LoginLink() {
   const [open, setOpen] = useState(false);
-  const { status } = useSession();
+  const { status, data } = useSession();
+
   return (
     <>
       {status === "unauthenticated" ? (
@@ -17,9 +18,11 @@ function LoginLink() {
         </Link>
       ) : (
         <>
-          <Link className={styles.link} href="/write">
-            Write
-          </Link>
+          {data?.user.role === "Admin" && (
+            <Link className={styles.link} href="/write">
+              Write
+            </Link>
+          )}
           <span
             className={styles.link}
             onClick={() => signOut({ callbackUrl: "http://localhost:3000" })}

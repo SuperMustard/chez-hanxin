@@ -18,7 +18,7 @@ import { app } from "@/utilities/firebase";
 type Props = {};
 
 export default function Page({}: Props) {
-  const { status } = useSession();
+  const { status, data } = useSession();
   const router = useRouter();
   const [file, setFile] = useState<File | null>(null);
   const [media, setMedia] = useState<string>("");
@@ -75,6 +75,10 @@ export default function Page({}: Props) {
 
   if (status === "loading") {
     return <div className={styles.loading}>Loading...</div>;
+  }
+
+  if (status === "authenticated" && data.user.role === "User") {
+    return <div className={styles.loading}>You need to be a Admin!</div>;
   }
 
   const slugify = (str: string) =>
