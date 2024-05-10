@@ -20,6 +20,9 @@ async function getData(): Promise<any> {
 
 async function MenuPost() {
   const data = await getData();
+  if (!data) {
+    return <></>;
+  }
 
   return (
     <>

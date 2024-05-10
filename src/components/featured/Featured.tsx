@@ -15,7 +15,7 @@ function Featured() {
       <div className={styles.post}>
         <div className={styles.imgContainer}>
           <Image
-            src="https://firebasestorage.googleapis.com/v0/b/chez-hanxin.appspot.com/o/montreal-sunrise.jpg?alt=media&token=fdec2e5d-3841-4ee5-a2e6-2e7cc8db7ccd"
+            src="https://firebasestorage.googleapis.com/v0/b/chez-hanxin.appspot.com/o/montreal-sunrise.webp?alt=media&token=3c9715a0-dfba-4856-ba57-71cf2e6fd00a"
             alt=""
             fill
             className={styles.image}
