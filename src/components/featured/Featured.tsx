@@ -15,7 +15,7 @@ function Featured() {
       <div className={styles.post}>
         <div className={styles.imgContainer}>
           <Image
-            src="/p1.jpeg"
+            src="https://firebasestorage.googleapis.com/v0/b/chez-hanxin.appspot.com/o/montreal-sunrise.jpg?alt=media&token=fdec2e5d-3841-4ee5-a2e6-2e7cc8db7ccd"
             alt=""
             fill
             className={styles.image}
@@ -29,7 +29,12 @@ function Featured() {
             blog here.
           </p>
           <div className={styles.buttonContainer}>
-            <button className={styles.button}>Read More</button>
+            <a
+              className={styles.button}
+              href={`${process.env.APIBASE_URL}/posts/introduction`}
+            >
+              Read More
+            </a>
           </div>
         </div>
       </div>

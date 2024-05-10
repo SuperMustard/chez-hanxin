@@ -68,7 +68,7 @@ function About() {
         <div className={styles.imageContainer} ref={imageRef}>
           <div className={styles.imageWrapper}>
             <Image
-              src="/p1.jpeg"
+              src="https://www.freepik.com/free-photo/montreal-sunrise_26923715.htm#query=montreal%20skyline&position=6&from_view=keyword&track=ais_user&uuid=87edfb7a-8702-4a39-b963-1003c045657d"
               alt="aboutPic"
               fill
               sizes="80vw"
