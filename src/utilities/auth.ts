@@ -31,8 +31,8 @@ export const authOptions: AuthOptions = {
           role: "User",
         };
       },
-      clientId: process.env.GITHUB_ID as string,
-      clientSecret: process.env.GITHUB_SECRET as string,
+      clientId: process.env.ID_GITHUB as string,
+      clientSecret: process.env.SECRET_GITHUB as string,
     }),
   ],
   callbacks: {

@@ -32,6 +32,8 @@ jobs:
           echo FIREBASE_BUCKET=${{secrets.FIREBASE_BUCKET}} >> .env
           echo POST_PER_PAGE=${{secrets.POST_PER_PAGE}} >> .env
           echo DATABASE_URL=${{secrets.DATABASE_URL}} >> .env
+          echo ID_GITHUB=${{secrets.ID_GITHUB}} >> .env
+          echo SECRET_GITHUB=${{secrets.SECRET_GITHUB}} >> .env
           cat .env
       - name: Use Node.js ${{ matrix.node-version }}
         uses: actions/setup-node@v3
