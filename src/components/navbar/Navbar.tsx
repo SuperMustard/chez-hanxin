@@ -18,9 +18,9 @@ function Navbar() {
           Homepage
         </Link>
         <Link href="/" className={styles.link}>
-          Contact
+          PlayGround
         </Link>
-        <Link href="/" className={styles.link}>
+        <Link href="/about" className={styles.link}>
           About
         </Link>
         <LoginLink></LoginLink>

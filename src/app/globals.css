@@ -10,6 +10,7 @@
 
 :root {
   --specialColor: #ee0707;
+  --ease: all 3s cubic-bezier(0.23, 1, 0.32, 1);
 }
 
 .light {
