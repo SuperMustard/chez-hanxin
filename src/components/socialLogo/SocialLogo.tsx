@@ -37,10 +37,19 @@ export default function SocialLogo({}: Props) {
       >
         <Image
           src="/In-Blue-26.png"
-          className="githubLogo"
+          className="linkinLogo"
           width={24}
           height={24}
-          alt="github"
+          alt="linkin"
+        ></Image>
+      </a>
+      <a href="mailto:hanxin1101@outlook.com">
+        <Image
+          src="/email_logo.png"
+          className="emailLogo"
+          width={24}
+          height={24}
+          alt="email"
         ></Image>
       </a>
     </div>

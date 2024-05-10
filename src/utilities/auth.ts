@@ -22,6 +22,15 @@ export const authOptions: AuthOptions = {
       clientSecret: process.env.GOOGLE_SECRET as string,
     }),
     Github({
+      profile(profile) {
+        return {
+          id: profile.id,
+          name: profile.login,
+          email: profile.email,
+          image: profile.avatar_url,
+          role: "User",
+        };
+      },
       clientId: process.env.GITHUB_ID as string,
       clientSecret: process.env.GITHUB_SECRET as string,
     }),

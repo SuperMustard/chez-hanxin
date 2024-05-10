@@ -27,7 +27,7 @@ function Footer() {
         <div className={styles.list}>
           <span className={styles.listTitle}>Links</span>
           <Link href="/">Homepage</Link>
-          <Link href="/">About</Link>
+          <Link href="/about">About</Link>
           <Link href="/">PlayGround</Link>
         </div>
         <div className={styles.list}>
@@ -53,6 +53,7 @@ function Footer() {
           >
             LinkedIn
           </Link>
+          <Link href="mailto:hanxin1101@outlook.com">Email</Link>
         </div>
       </div>
     </div>
