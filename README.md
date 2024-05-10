@@ -7,6 +7,7 @@ This is my personal blog project.
 + authjs
 + Prisma
 + MongoDB
++ Firebase for image
 
 ---
 
