@@ -29,10 +29,7 @@ function Featured() {
             blog here.
           </p>
           <div className={styles.buttonContainer}>
-            <a
-              className={styles.button}
-              href={`${process.env.APIBASE_URL}/posts/introduction`}
-            >
+            <a className={styles.button} href="/posts/introduction">
               Read More
             </a>
           </div>
