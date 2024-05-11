@@ -20,13 +20,14 @@ async function getData(): Promise<any> {
 
 async function MenuPost() {
   const data = await getData();
+  console.log(data);
   if (!data) {
     return <></>;
   }
 
   return (
     <>
-      <div className={styles.items}>
+      {/* <div className={styles.items}>
         {data?.map((item: PostWithUser) => (
           <Link
             href={`/posts/${item.slug}`}
@@ -59,7 +60,7 @@ async function MenuPost() {
             </div>
           </Link>
         ))}
-      </div>
+      </div> */}
     </>
   );
 }
