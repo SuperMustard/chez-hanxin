@@ -8,6 +8,13 @@ This is my personal blog project.
 + Prisma
 + MongoDB
 + Firebase for image
++ Github Action and Runder for CI/CD
++ Hosting on Vultr
+
+[Preview](https://www.chez-hanxin.uk)
+
+![image](https://github.com/SuperMustard/chez-hanxin/assets/6720652/1f103bc4-ae3e-43b1-8036-dad1d30984fe)
+
 
 ---
 
