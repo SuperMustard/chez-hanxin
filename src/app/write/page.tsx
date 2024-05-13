@@ -14,6 +14,7 @@ import {
   getDownloadURL,
 } from "firebase/storage";
 import { app } from "@/utilities/firebase";
+import Tags from "@/components/tags/Tags";
 
 type Props = {};
 
@@ -26,6 +27,7 @@ export default function Page({}: Props) {
   const [open, setOpen] = useState(false);
   const [value, setValue] = useState("");
   const [catSlug, setCatSlug] = useState("");
+  const [tag, setTag] = useState("");
   const ReactQuill = useMemo(
     () => dynamic(() => import("react-quill"), { ssr: false }),
     []
@@ -104,6 +106,15 @@ export default function Page({}: Props) {
     console.log(res);
   }
 
+  async function handleAddTag() {
+    const res = await fetch("/api/tags", {
+      method: "POST",
+      body: JSON.stringify({
+        name: tag,
+      }),
+    });
+  }
+
   return (
     <div className={styles.container}>
       <input
@@ -121,6 +132,9 @@ export default function Page({}: Props) {
         <option value="game">game</option>
         <option value="life">life</option>
       </select>
+      <div className={styles.tags}>
+        <Tags></Tags>
+      </div>
       <div className={styles.editor}>
         <button className={styles.button} onClick={() => setOpen(!open)}>
           <Image src="/plus.png" alt="" width={16} height={16} />

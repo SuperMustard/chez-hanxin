@@ -109,6 +109,8 @@ model Post {
   userEmail String
   user      User      @relation(fields: [userEmail], references: [email])
   comments  Comment[]
+  tag       Tag[]     @relation(fields: [tagId], references: [id])
+  tagId     String[]
 }
 
 model Comment {
@@ -119,4 +121,12 @@ model Comment {
   user      User     @relation(fields: [userEmail], references: [email])
   postSlug  String
   post      Post     @relation(fields: [postSlug], references: [slug])
+}
+
+model Tag {
+  id      String   @id @default(cuid()) @map("_id")
+  name    String   @unique
+  label   String
+  postIDs String[]
+  posts   Post[]   @relation(fields: [postIDs], references: [id])
 }
