@@ -47,6 +47,7 @@ export default function Comments({ postSlug }: Props) {
       body: JSON.stringify({ desc, postSlug }),
     });
     if (res.ok) {
+      setDesc("");
       mutate();
     }
   }
@@ -60,6 +61,7 @@ export default function Comments({ postSlug }: Props) {
             placeholder="write a comment..."
             className={styles.input}
             onChange={(e) => setDesc(e.target.value)}
+            value={desc}
           ></textarea>
           <button className={styles.button} onClick={handleSubmit}>
             Send
