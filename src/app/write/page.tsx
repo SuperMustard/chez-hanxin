@@ -14,9 +14,28 @@ import {
   getDownloadURL,
 } from "firebase/storage";
 import { app } from "@/utilities/firebase";
-import Tags from "@/components/tags/Tags";
+import { MultiValue } from "react-select";
+import CreatableSelect from "react-select/creatable";
 
 type Props = {};
+
+type tag = {
+  name: string;
+  label: string;
+};
+
+async function getTags(): Promise<any> {
+  const url: string = `${process.env.NEXT_PUBLIC_FRONTEND_URL}/api/tags`;
+  const res = await fetch(url, {
+    cache: "no-store",
+  });
+
+  if (!res.ok) {
+    throw new Error("Cant fetch post!");
+  }
+
+  return res.json();
+}
 
 export default function Page({}: Props) {
   const { status, data } = useSession();
@@ -32,6 +51,12 @@ export default function Page({}: Props) {
     () => dynamic(() => import("react-quill"), { ssr: false }),
     []
   );
+
+  const [selectedTags, setSelectedTags] = useState<MultiValue<tag> | null>(
+    null
+  );
+  const TAGS: tag[] = [];
+  const [tags, setTags] = useState<tag[]>(TAGS);
 
   useEffect(() => {
     const storage = getStorage(app);
@@ -92,6 +117,12 @@ export default function Page({}: Props) {
       .replace(/^-+|-+$/g, "");
 
   async function handleSubmit() {
+    const convertTags: tag[] =
+      selectedTags?.map((tag) => {
+        let temp: tag = { name: tag.label, label: tag.label };
+        return temp;
+      }) || []!;
+    console.log(convertTags);
     const res = await fetch("/api/posts", {
       method: "POST",
       body: JSON.stringify({
@@ -100,19 +131,13 @@ export default function Page({}: Props) {
         img: media,
         slug: slugify(title),
         catSlug: catSlug || "life",
+        tag: convertTags,
       }),
     });
 
-    console.log(res);
-  }
-
-  async function handleAddTag() {
-    const res = await fetch("/api/tags", {
-      method: "POST",
-      body: JSON.stringify({
-        name: tag,
-      }),
-    });
+    if (!res.ok) {
+      console.log("Error! Can't post!");
+    }
   }
 
   return (
@@ -133,7 +158,11 @@ export default function Page({}: Props) {
         <option value="life">life</option>
       </select>
       <div className={styles.tags}>
-        <Tags></Tags>
+        <CreatableSelect
+          isMulti
+          options={tags}
+          onChange={(value) => setSelectedTags(value)}
+        />
       </div>
       <div className={styles.editor}>
         <button className={styles.button} onClick={() => setOpen(!open)}>

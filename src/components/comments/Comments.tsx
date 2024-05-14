@@ -35,7 +35,7 @@ type CommentWithUser = {
 
 export default function Comments({ postSlug }: Props) {
   const { status } = useSession();
-  const APIBASE_URL = "http://localhost:3000";
+  const APIBASE_URL = process.env.NEXT_PUBLIC_FRONTEND_URL;
   const url = `${APIBASE_URL}/api/comments?postSlug=${postSlug}`;
   const { data, mutate, isLoading } = useSWR(url, fetcher);
 

@@ -35,6 +35,10 @@ export async function GET(req: Request) {
   }
 }
 
+type tag = {
+  name: string;
+  label: string;
+};
 //Create a Post
 export async function POST(req: Request) {
   const session = await getAuthSession();
@@ -45,8 +49,23 @@ export async function POST(req: Request) {
 
   try {
     const body = await req.json();
+    const tags = body["tag"].map((tag: tag) => {
+      let temp = {
+        create: { name: tag.name, label: tag.label },
+        where: { name: tag.name },
+      };
+
+      return temp;
+    });
+
     const post = await prisma.post.create({
-      data: { ...body, userEmail: session.user?.email },
+      data: {
+        ...body,
+        userEmail: session.user?.email,
+        tag: {
+          connectOrCreate: tags,
+        },
+      },
     });
     return new NextResponse(JSON.stringify(post));
   } catch (err) {

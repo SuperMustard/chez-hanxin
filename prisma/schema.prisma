@@ -109,8 +109,8 @@ model Post {
   userEmail String
   user      User      @relation(fields: [userEmail], references: [email])
   comments  Comment[]
-  tag       Tag[]     @relation(fields: [tagId], references: [id])
   tagId     String[]
+  tag       Tag[]     @relation(fields: [tagId], references: [id])
 }
 
 model Comment {
