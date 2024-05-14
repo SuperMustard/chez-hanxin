@@ -24,6 +24,7 @@ jobs:
           echo NEXTAUTH_URL=${{secrets.NEXTAUTH_URL}} >> .env
           echo NEXTAUTH_SECRET=${{secrets.NEXTAUTH_SECRET}} >> .env
           echo APIBASE_URL=${{secrets.APIBASE_URL}} >> .env
+          echo NEXT_PUBLIC_FRONTEND_URL=${{secrets.NEXT_PUBLIC_FRONTEND_URL}} >> .env
           echo FIREBASE_API=${{secrets.FIREBASE_API}} >> .env
           echo FIREBASE_APPID=${{secrets.FIREBASE_APPID}} >> .env
           echo FIREBASE_SENDERID=${{secrets.FIREBASE_SENDERID}} >> .env
