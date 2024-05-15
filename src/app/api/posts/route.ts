@@ -8,17 +8,26 @@ export async function GET(req: Request) {
   const { searchParams } = new URL(req.url);
   const page = parseInt(searchParams.get("page") || "1");
   const cat = searchParams.get("cat") || "";
+  const tag = searchParams.get("tag") || "";
+  console.log("tag is:" + searchParams);
   const orderBy: Prisma.PostOrderByWithRelationInput[] = [
     {
       createdAt: "desc",
     },
   ];
+
   const query = {
     take: parseInt(process.env.POST_PER_PAGE || "4"),
     skip: parseInt(process.env.POST_PER_PAGE || "4") * (page - 1),
     where: {
       ...(cat && { catSlug: cat }),
+      ...(tag && {
+        tagId: {
+          has: tag,
+        },
+      }),
     },
+    include: { tag: true },
     orderBy,
   };
 

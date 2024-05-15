@@ -4,8 +4,8 @@ import Pagination from "../pagination/Pagination";
 import { Post } from "@prisma/client";
 import Card from "../card/Card";
 
-async function getData(page: number, cat: string): Promise<any> {
-  const url: string = `${process.env.APIBASE_URL}/api/posts?page=${page}&cat=${cat}`;
+async function getData(page: number, cat: string, tag: string): Promise<any> {
+  const url: string = `${process.env.APIBASE_URL}/api/posts?page=${page}&cat=${cat}&tag=${tag}`;
   const res = await fetch(url, {
     cache: "no-store",
   });
@@ -20,10 +20,11 @@ async function getData(page: number, cat: string): Promise<any> {
 type prop = {
   page: number;
   cat: string;
+  tag: string;
 };
 
-async function CardList({ page, cat }: prop) {
-  const { posts, count } = await getData(page, cat);
+async function CardList({ page, cat, tag }: prop) {
+  const { posts, count } = await getData(page, cat, tag);
 
   const hasPrev = parseInt(process.env.POST_PER_PAGE || "4") * (page - 1) > 0;
   const hasNext =

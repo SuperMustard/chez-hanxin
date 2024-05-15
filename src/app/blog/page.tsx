@@ -10,12 +10,17 @@ type Props = {
 export default function BlogPage({ searchParams }: Props) {
   const page = parseInt(searchParams.page || "1");
   const cat = searchParams.cat || "";
+  const tag = searchParams.tag || "";
+  const tagName = searchParams.tagName || "";
 
   return (
     <div className={styles.container}>
-      <h1 className={styles.title}>{cat} Blog</h1>
+      <h1 className={styles.title}>
+        {cat}
+        {tagName} Blog
+      </h1>
       <div className={styles.content}>
-        <CardList page={page} cat={cat}></CardList>
+        <CardList page={page} cat={cat} tag={tag}></CardList>
         <Menu></Menu>
       </div>
     </div>

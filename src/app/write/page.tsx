@@ -16,6 +16,7 @@ import {
 import { app } from "@/utilities/firebase";
 import { MultiValue } from "react-select";
 import CreatableSelect from "react-select/creatable";
+import { Tag } from "@prisma/client";
 
 type Props = {};
 
@@ -23,19 +24,6 @@ type tag = {
   name: string;
   label: string;
 };
-
-async function getTags(): Promise<any> {
-  const url: string = `${process.env.NEXT_PUBLIC_FRONTEND_URL}/api/tags`;
-  const res = await fetch(url, {
-    cache: "no-store",
-  });
-
-  if (!res.ok) {
-    throw new Error("Cant fetch post!");
-  }
-
-  return res.json();
-}
 
 export default function Page({}: Props) {
   const { status, data } = useSession();
@@ -55,8 +43,8 @@ export default function Page({}: Props) {
   const [selectedTags, setSelectedTags] = useState<MultiValue<tag> | null>(
     null
   );
-  const TAGS: tag[] = [];
-  const [tags, setTags] = useState<tag[]>(TAGS);
+
+  const [tags, setTags] = useState<tag[]>([]);
 
   useEffect(() => {
     const storage = getStorage(app);
@@ -95,6 +83,33 @@ export default function Page({}: Props) {
 
     file && upload();
   }, [file]);
+
+  useEffect(() => {
+    async function getTags(): Promise<any> {
+      const url: string = `${process.env.NEXT_PUBLIC_FRONTEND_URL}/api/tags`;
+      const res = await fetch(url, {
+        cache: "no-store",
+      });
+      if (!res.ok) {
+        setTags([]);
+        throw new Error("Cant fetch post!");
+      }
+
+      return res.json();
+    }
+    getTags().then((data) => {
+      let tagArray: tag[] = data?.map((tag: Tag) => {
+        let newTag: tag = {
+          name: tag.name,
+          label: tag.label,
+        };
+
+        return newTag;
+      });
+
+      setTags(tagArray);
+    });
+  }, []);
 
   if (status === "unauthenticated") {
     router.push("/");
@@ -140,6 +155,19 @@ export default function Page({}: Props) {
     }
   }
 
+  const colourOptions = [
+    { value: "ocean", label: "Ocean", color: "#00B8D9", isFixed: true },
+    { value: "blue", label: "Blue", color: "#0052CC", isDisabled: true },
+    { value: "purple", label: "Purple", color: "#5243AA" },
+    { value: "red", label: "Red", color: "#FF5630", isFixed: true },
+    { value: "orange", label: "Orange", color: "#FF8B00" },
+    { value: "yellow", label: "Yellow", color: "#FFC400" },
+    { value: "green", label: "Green", color: "#36B37E" },
+    { value: "forest", label: "Forest", color: "#00875A" },
+    { value: "slate", label: "Slate", color: "#253858" },
+    { value: "silver", label: "Silver", color: "#666666" },
+  ];
+
   return (
     <div className={styles.container}>
       <input
@@ -148,21 +176,29 @@ export default function Page({}: Props) {
         className={styles.input}
         onChange={(e) => setTitle(e.target.value)}
       />
-      <select
-        className={styles.select}
-        onChange={(e) => setCatSlug(e.target.value)}
-      >
-        <option value="coding">coding</option>
-        <option value="travel">travel</option>
-        <option value="game">game</option>
-        <option value="life">life</option>
-      </select>
-      <div className={styles.tags}>
-        <CreatableSelect
-          isMulti
-          options={tags}
-          onChange={(value) => setSelectedTags(value)}
-        />
+      <div>
+        <h4>Category: </h4>
+        <select
+          className={styles.select}
+          onChange={(e) => setCatSlug(e.target.value)}
+        >
+          <option value="coding">coding</option>
+          <option value="travel">travel</option>
+          <option value="game">game</option>
+          <option value="life">life</option>
+        </select>
+      </div>
+      <div>
+        <h4>Tags: </h4>
+        <div className={styles.tags}>
+          <CreatableSelect
+            isMulti
+            options={tags}
+            getOptionLabel={(option) => option.label}
+            getOptionValue={(option) => option.name}
+            onChange={setSelectedTags}
+          />
+        </div>
       </div>
       <div className={styles.editor}>
         <button className={styles.button} onClick={() => setOpen(!open)}>

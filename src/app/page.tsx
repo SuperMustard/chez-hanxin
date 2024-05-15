@@ -20,7 +20,7 @@ export default function Home({ searchParams }: Props): JSX.Element {
       <Featured></Featured>
       <CategoryList></CategoryList>
       <div className={styles.content}>
-        <CardList page={page} cat={""}></CardList>
+        <CardList page={page} cat={""} tag={""}></CardList>
         <Menu></Menu>
       </div>
     </div>
