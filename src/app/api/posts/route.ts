@@ -9,7 +9,6 @@ export async function GET(req: Request) {
   const page = parseInt(searchParams.get("page") || "1");
   const cat = searchParams.get("cat") || "";
   const tag = searchParams.get("tag") || "";
-  console.log("tag is:" + searchParams);
   const orderBy: Prisma.PostOrderByWithRelationInput[] = [
     {
       createdAt: "desc",

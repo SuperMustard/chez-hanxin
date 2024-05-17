@@ -3,7 +3,7 @@ import styles from "./singlePage.module.css";
 import Image from "next/image";
 import Menu from "@/components/menu/Menu";
 import Comments from "@/components/comments/Comments";
-import { Post, User } from "@prisma/client";
+import { Post, Tag, User } from "@prisma/client";
 
 async function getData(slug: string): Promise<any> {
   const url: string = `${process.env.APIBASE_URL}/api/posts/${slug}`;
@@ -32,6 +32,16 @@ export default async function Page({ params }: { params: searchParams }) {
       <div className={styles.infoContainer}>
         <div className={styles.textContainer}>
           <h1 className={styles.title}>{data?.title}</h1>
+          <div className={styles.tags}>
+            <h5>Tags: </h5>
+            {data.tag.map((tag: Tag) => {
+              return (
+                <h5 className={styles.tag} key={tag.id}>
+                  {tag.label}
+                </h5>
+              );
+            })}
+          </div>
           <div className={styles.user}>
             {data?.user?.image && (
               <div className={styles.userImageContainer}>

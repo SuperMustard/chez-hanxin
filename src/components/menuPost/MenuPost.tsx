@@ -3,7 +3,7 @@ import styles from "./menuPost.module.css";
 import React from "react";
 import Link from "next/link";
 import Image from "next/image";
-import { User } from "@prisma/client";
+import { Tag, User } from "@prisma/client";
 
 async function getData(): Promise<any> {
   const url: string = `${process.env.APIBASE_URL}/api/mostviewed`;
@@ -55,6 +55,16 @@ async function MenuPost() {
                   {" "}
                   - {item?.createdAt.substring(0, 10)}
                 </span>
+                <div className={styles.tags}>
+                  <h5>Tags: </h5>
+                  {item.tag.map((tag: Tag) => {
+                    return (
+                      <h5 className={styles.tag} key={tag.id}>
+                        {tag.label}
+                      </h5>
+                    );
+                  })}
+                </div>
               </div>
             </div>
           </Link>
