@@ -11,7 +11,7 @@ export async function GET(req: Request, { params }: { params: searchParams }) {
     const post = await prisma.post.update({
       where: { slug },
       data: { views: { increment: 1 } },
-      include: { user: true },
+      include: { user: true, tag: true },
     });
     return new NextResponse(JSON.stringify(post));
   } catch (err) {

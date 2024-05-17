@@ -11,7 +11,7 @@ export async function GET() {
   ];
   const query = {
     take: parseInt(process.env.POST_PER_PAGE || "5"),
-    include: { user: true },
+    include: { user: true, tag: true },
     orderBy,
   };
 

@@ -8,6 +8,7 @@ type PostDataString = {
   views: number;
   catSlug: string;
   userEmail: string;
+  tag: Tag[];
 };
 
 type PostWithUser = {
@@ -21,4 +22,5 @@ type PostWithUser = {
   catSlug: string;
   userEmail: string;
   user: User;
+  tag: Tag[];
 };
