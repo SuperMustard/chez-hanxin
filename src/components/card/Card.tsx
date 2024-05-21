@@ -15,43 +15,40 @@ function removeHTMLTags(str: string): string {
 
 function removeMarkdownTags(markdown: string): string {
   // Replace bold text with plain text
-  markdown = markdown.replaceAll(RegExp("**(.+?)**"), "");
-  markdown = markdown.replaceAll(RegExp("__(.+?)__"), "");
+  markdown = markdown.replace(/\*\*(.+?)\*\*/g, "");
 
   // Replace italicized text with plain text
-  markdown = markdown.replaceAll(RegExp("_(.+?)_"), "");
-  markdown = markdown.replaceAll(RegExp("*(.+?)*"), "");
+  markdown = markdown.replace(/_(.+?)_/g, "");
 
   // Replace strikethrough text with plain text
-  markdown = markdown.replaceAll(RegExp("~~(.+?)~~"), "");
+  markdown = markdown.replace(/~~(.+?)~~/g, "");
 
-  // Replace inline code blocks with plain text
-  markdown = markdown.replaceAll(RegExp("`(.+?)`"), "");
+  // Remove inline code blocks
+  markdown = markdown.replace(/`(.+?)`/g, "");
 
-  // Replace code blocks with plain text
-  markdown = markdown.replaceAll(RegExp("```[sS]*?```", "m"), "");
-  markdown = markdown.replaceAll(RegExp("```[sS]*?```", "m"), "");
+  // Remove code blocks
+  markdown = markdown.replace(/```[\s\S]*?```/g, "");
 
   // Remove links
-  markdown = markdown.replaceAll(RegExp("[(.+?)]((.+?))"), "");
+  markdown = markdown.replace(/\[(.+?)\]\((.+?)\)/g, "");
 
   // Remove images
-  markdown = markdown.replaceAll(RegExp("![(.+?)]((.+?))"), "");
+  markdown = markdown.replace(/!\[(.+?)\]\((.+?)\)/g, "");
 
   // Remove headings
-  markdown = markdown.replaceAll(RegExp("^#+s+(.+?)s*$", "m"), "");
-  markdown = markdown.replaceAll(RegExp("^s*=+s*$", "m"), "");
-  markdown = markdown.replaceAll(RegExp("^s*-+s*$", "m"), "");
+  markdown = markdown.replace(/^#+\s+(.+?)\s*$/gm, "");
+  markdown = markdown.replace(/^\s*=+\s*$/gm, "");
+  markdown = markdown.replace(/^\s*-+\s*$/gm, "");
 
   // Remove blockquotes
-  markdown = markdown.replaceAll(RegExp("^s*>s+(.+?)s*$", "m"), "");
+  markdown = markdown.replace(/^\s*>\s+(.+?)\s*$/gm, "");
 
   // Remove lists
-  markdown = markdown.replaceAll(RegExp("^s*[*+-]s+(.+?)s*$", "m"), "");
-  markdown = markdown.replaceAll(RegExp("^s*d+.s+(.+?)s*$", "m"), "");
+  markdown = markdown.replace(/^\s*[\*\+-]\s+(.+?)\s*$/gm, "");
+  markdown = markdown.replace(/^\s*\d+\.\s+(.+?)\s*$/gm, "");
 
   // Remove horizontal lines
-  markdown = markdown.replaceAll(RegExp("^s*[-*_]{3,}s*$", "m"), "");
+  markdown = markdown.replace(/^\s*[-*_]{3,}\s*$/gm, "");
 
   return markdown;
 }
