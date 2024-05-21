@@ -2,9 +2,7 @@
 import styles from "./write.module.css";
 import React, { useEffect, useMemo, useState } from "react";
 import Image from "next/image";
-//import ReactQuill from "react-quill";
-import dynamic from "next/dynamic";
-import "react-quill/dist/quill.bubble.css";
+import MarkdownHeader from "@/components/markdownHeader/MarkdownHeader";
 import { useSession } from "next-auth/react";
 import { useRouter } from "next/navigation";
 import {
@@ -17,6 +15,11 @@ import { app } from "@/utilities/firebase";
 import { MultiValue } from "react-select";
 import CreatableSelect from "react-select/creatable";
 import { Tag } from "@prisma/client";
+import Markdown from "react-markdown";
+import { CodeBlock, Pre } from "@/components/codeBlock/CodeBlock";
+import remarkGfm from "remark-gfm";
+import rehypeSanitize from "rehype-sanitize";
+import rehypeExternalLinks from "rehype-external-links";
 
 type Props = {};
 
@@ -26,6 +29,7 @@ type tag = {
 };
 
 export default function Page({}: Props) {
+  const options = { code: CodeBlock, pre: Pre };
   const { status, data } = useSession();
   const router = useRouter();
   const [file, setFile] = useState<File | null>(null);
@@ -35,16 +39,16 @@ export default function Page({}: Props) {
   const [value, setValue] = useState("");
   const [catSlug, setCatSlug] = useState("");
   const [tag, setTag] = useState("");
-  const ReactQuill = useMemo(
-    () => dynamic(() => import("react-quill"), { ssr: false }),
-    []
-  );
 
   const [selectedTags, setSelectedTags] = useState<MultiValue<tag> | null>(
     null
   );
 
   const [tags, setTags] = useState<tag[]>([]);
+
+  const addSyntax = (syntax: string) => {
+    return setValue(value + syntax);
+  };
 
   useEffect(() => {
     const storage = getStorage(app);
@@ -122,7 +126,6 @@ export default function Page({}: Props) {
   if (status === "authenticated" && data.user.role === "User") {
     return <div className={styles.loading}>You need to be a Admin!</div>;
   }
-
   const slugify = (str: string) =>
     str
       .toLowerCase()
@@ -154,19 +157,6 @@ export default function Page({}: Props) {
       console.log("Error! Can't post!");
     }
   }
-
-  const colourOptions = [
-    { value: "ocean", label: "Ocean", color: "#00B8D9", isFixed: true },
-    { value: "blue", label: "Blue", color: "#0052CC", isDisabled: true },
-    { value: "purple", label: "Purple", color: "#5243AA" },
-    { value: "red", label: "Red", color: "#FF5630", isFixed: true },
-    { value: "orange", label: "Orange", color: "#FF8B00" },
-    { value: "yellow", label: "Yellow", color: "#FFC400" },
-    { value: "green", label: "Green", color: "#36B37E" },
-    { value: "forest", label: "Forest", color: "#00875A" },
-    { value: "slate", label: "Slate", color: "#253858" },
-    { value: "silver", label: "Silver", color: "#666666" },
-  ];
 
   return (
     <div className={styles.container}>
@@ -201,41 +191,36 @@ export default function Page({}: Props) {
         </div>
       </div>
       <div className={styles.editor}>
-        <button className={styles.button} onClick={() => setOpen(!open)}>
-          <Image src="/plus.png" alt="" width={16} height={16} />
-        </button>
-        {open && (
-          <div className={styles.add}>
-            <input
-              type="file"
-              id="image"
-              onChange={(e) => {
-                if (e.target.files) {
-                  setFile(e.target.files[0]);
-                }
-              }}
-              style={{ display: "none" }}
+        <MarkdownHeader addSyntax={addSyntax} />
+        <div className="h-screen flex justify-between">
+          <section className="w-full h-full">
+            <h3>Input</h3>
+            <textarea
+              className="w-full h-full border-none outline-none placeholder:opacity-80 pt-5"
+              placeholder="Input text..."
+              value={value}
+              onChange={(e) => setValue(e.target.value)}
             />
-            <button className={styles.addButton}>
-              <label htmlFor="image">
-                <Image src="/image.png" alt="" width={16} height={16} />
-              </label>
-            </button>
-            <button className={styles.addButton}>
-              <Image src="/external.png" alt="" width={16} height={16} />
-            </button>
-            <button className={styles.addButton}>
-              <Image src="/video.png" alt="" width={16} height={16} />
-            </button>
+          </section>
+          <div className="fixed ... border-dashed" />
+          <div className="flex w-full h-full flex-col">
+            <h3>Preview</h3>
+            <Markdown
+              className="prose prose-p:leading-tight min-w-full pt-5"
+              components={options}
+              remarkPlugins={[remarkGfm]}
+              rehypePlugins={[
+                rehypeSanitize,
+                [
+                  rehypeExternalLinks,
+                  { content: { type: "text", value: "🔗" } },
+                ],
+              ]}
+            >
+              {value}
+            </Markdown>
           </div>
-        )}
-        <ReactQuill
-          className={styles.textArea}
-          theme="bubble"
-          value={value}
-          onChange={setValue}
-          placeholder="Tell your story..."
-        />
+        </div>
       </div>
       <button className={styles.publish} onClick={handleSubmit}>
         Publish

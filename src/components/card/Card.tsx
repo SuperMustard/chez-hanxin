@@ -13,6 +13,49 @@ function removeHTMLTags(str: string): string {
   return str.replace(/<[^>]+>/gi, "");
 }
 
+function removeMarkdownTags(markdown: string): string {
+  // Replace bold text with plain text
+  markdown = markdown.replaceAll(RegExp("**(.+?)**"), "");
+  markdown = markdown.replaceAll(RegExp("__(.+?)__"), "");
+
+  // Replace italicized text with plain text
+  markdown = markdown.replaceAll(RegExp("_(.+?)_"), "");
+  markdown = markdown.replaceAll(RegExp("*(.+?)*"), "");
+
+  // Replace strikethrough text with plain text
+  markdown = markdown.replaceAll(RegExp("~~(.+?)~~"), "");
+
+  // Replace inline code blocks with plain text
+  markdown = markdown.replaceAll(RegExp("`(.+?)`"), "");
+
+  // Replace code blocks with plain text
+  markdown = markdown.replaceAll(RegExp("```[sS]*?```", "m"), "");
+  markdown = markdown.replaceAll(RegExp("```[sS]*?```", "m"), "");
+
+  // Remove links
+  markdown = markdown.replaceAll(RegExp("[(.+?)]((.+?))"), "");
+
+  // Remove images
+  markdown = markdown.replaceAll(RegExp("![(.+?)]((.+?))"), "");
+
+  // Remove headings
+  markdown = markdown.replaceAll(RegExp("^#+s+(.+?)s*$", "m"), "");
+  markdown = markdown.replaceAll(RegExp("^s*=+s*$", "m"), "");
+  markdown = markdown.replaceAll(RegExp("^s*-+s*$", "m"), "");
+
+  // Remove blockquotes
+  markdown = markdown.replaceAll(RegExp("^s*>s+(.+?)s*$", "m"), "");
+
+  // Remove lists
+  markdown = markdown.replaceAll(RegExp("^s*[*+-]s+(.+?)s*$", "m"), "");
+  markdown = markdown.replaceAll(RegExp("^s*d+.s+(.+?)s*$", "m"), "");
+
+  // Remove horizontal lines
+  markdown = markdown.replaceAll(RegExp("^s*[-*_]{3,}s*$", "m"), "");
+
+  return markdown;
+}
+
 function Card({ post }: prop) {
   return (
     <div className={styles.container}>
@@ -50,7 +93,7 @@ function Card({ post }: prop) {
           <h3>{post.title}</h3>
         </Link>
         <p className={styles.desc}>
-          {removeHTMLTags(post.desc.substring(0, 60))}
+          {removeMarkdownTags(post.desc.substring(0, 60))}
         </p>
         <Link className={styles.link} href={`/posts/${post.slug}`}>
           Read More...

@@ -4,6 +4,11 @@ import Image from "next/image";
 import Menu from "@/components/menu/Menu";
 import Comments from "@/components/comments/Comments";
 import { Post, Tag, User } from "@prisma/client";
+import Markdown from "react-markdown";
+import { CodeBlock, Pre } from "@/components/codeBlock/CodeBlock";
+import remarkGfm from "remark-gfm";
+import rehypeSanitize from "rehype-sanitize";
+import rehypeExternalLinks from "rehype-external-links";
 
 async function getData(slug: string): Promise<any> {
   const url: string = `${process.env.APIBASE_URL}/api/posts/${slug}`;
@@ -27,6 +32,7 @@ export default async function Page({ params }: { params: searchParams }) {
 
   const data: PostWithUser = await getData(slug);
   const desc = data?.desc || "";
+  const options = { code: CodeBlock, pre: Pre };
   return (
     <div className={styles.container}>
       <div className={styles.infoContainer}>
@@ -78,8 +84,23 @@ export default async function Page({ params }: { params: searchParams }) {
           )}
           <div
             className={styles.post}
-            dangerouslySetInnerHTML={{ __html: desc }}
-          ></div>
+            //dangerouslySetInnerHTML={{ __html: desc }}
+          >
+            <Markdown
+              className="prose prose-p:leading-tight min-w-full pt-5"
+              components={options}
+              remarkPlugins={[remarkGfm]}
+              rehypePlugins={[
+                rehypeSanitize,
+                [
+                  rehypeExternalLinks,
+                  { content: { type: "text", value: "🔗" } },
+                ],
+              ]}
+            >
+              {desc}
+            </Markdown>
+          </div>
           <div className={styles.commentContainer}>
             <Comments postSlug={slug}></Comments>
           </div>
