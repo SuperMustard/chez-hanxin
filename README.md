@@ -10,13 +10,21 @@ This is my personal blog project.
 + Firebase for image
 + Github Action and Runner for CI/CD
 + Hosting on Vultr
++ react-markdown
 
 [Preview](https://www.chez-hanxin.uk)
 
 ![image](https://github.com/SuperMustard/chez-hanxin/assets/6720652/1f103bc4-ae3e-43b1-8036-dad1d30984fe)
 
-Multiple selected tags
+### Multiple selected tags
 ![image](https://github.com/SuperMustard/chez-hanxin/assets/6720652/ea87978a-e50d-483e-ae21-e3c0770637c4)
+
+### Markdown Editor
++ Using **react-markdown** and **tailwindcss/typography** to translate markdown code.
++ Using **react-syntax-highlighter** to highlight code.
++ Using **remark-gfm** to support table.
+
+![image](https://github.com/SuperMustard/chez-hanxin/assets/6720652/17af78e6-3089-4c28-8233-3af710aee677)
 
 
 ---
